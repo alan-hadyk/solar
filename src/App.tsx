@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-function App() {
-  return (
-    <div>
-      Solar
-    </div>
-  );
-}
+import Home from '<pages>/home/HomePage';
+
+const App = () => (
+  <Fragment>
+    <Home />
+  </Fragment>
+);
 
 export default App;
