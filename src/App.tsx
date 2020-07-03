@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
+import React, { Fragment } from "react";
 
-import Home from '<pages>/home/HomePage';
+import Home from "<pages>/home/HomePage";
 
-const App = () => (
+const App = (): JSX.Element => (
   <Fragment>
     <Home />
   </Fragment>
