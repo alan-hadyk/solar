@@ -5,6 +5,6 @@ export interface CreateState {
 
 export interface StateProviderProps {
   WrappedComponent: React.ComponentType<JSX.IntrinsicAttributes>;
-  moduleState: JSX.IntrinsicAttributes;
+  moduleState: unknown;
   otherProps: JSX.IntrinsicAttributes;
 }

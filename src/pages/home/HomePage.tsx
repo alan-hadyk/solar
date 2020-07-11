@@ -1,11 +1,16 @@
-import React from "react";
+import React, { Fragment } from "react";
 
-import Oscillator from "<pages>/home/modules/oscillator/Oscillator";
+// import Oscillator from "<pages>/home/modules/oscillator/Oscillator";
+import Controls from "<pages>/home/modules/controls/Controls";
 
-function Home(): JSX.Element {
-  return (
-    <Oscillator />
-  );
-}
+import { withSynthStateProvider } from "<state>/withSynthState";
 
-export default Home;
+const Home = (): JSX.Element => (
+  <Fragment>
+    {/* <Oscillator /> */}
+    <Controls />
+  </Fragment>
+);
+
+
+export default withSynthStateProvider(Home);
