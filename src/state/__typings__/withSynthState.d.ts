@@ -1,9 +1,15 @@
-import { UseLoop } from "<hooks>/__typings__/useLoop.d.ts";
 import { UsePolySynth } from "<hooks>/__typings__/usePolySynth.d.ts";
+import { UsePattern } from "<hooks>/__typings__/usePattern.d.ts";
+import { UseSequence } from "<hooks>/__typings__/useSequence.d.ts";
 
 export interface ModuleState {
-  loop: UseLoop;
+  bpm: number;
+  loopState: string;
+  pattern: UsePattern;
   polySynth: UsePolySynth;
+  sequence: UseSequence;
+  setBpm: Dispatch<SetStateAction<number>>;
+  setLoopState: Dispatch<SetStateAction<string>>;
 }
 
 export interface SynthState {

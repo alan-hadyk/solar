@@ -17,10 +17,11 @@ const useStyles = makeStyles({
 
 function Controls({ synthState }: SynthState): JSX.Element {
   const classes = useStyles();
-  const { loop, polySynth } = synthState || {};
-  const { bpm, loopInstance, loopState, setBpm, startLoop, stopLoop } = loop || {};
+  const { bpm, sequence, polySynth, setLoopState, loopState, setBpm } = synthState || {};
   const { polySynthInstance } = polySynth || {};
+  const { sequenceInstance, startSequence, stopSequence } = sequence || {};
 
+  console.log("sequenceInstance", sequenceInstance);
   return (
     <div className={classes.root}>
       <ButtonGroup variant="contained" color="primary">
@@ -33,7 +34,7 @@ function Controls({ synthState }: SynthState): JSX.Element {
         </Button>
         <Button 
           disabled={loopState === "stopped"} 
-          onClick={stopLoop}
+          onClick={stop}
         >
           Stop
         </Button>
@@ -51,18 +52,18 @@ function Controls({ synthState }: SynthState): JSX.Element {
   );
 
   function start(): void {
-    loopInstance.callback = (time: number): void => {
-      polySynthInstance.triggerAttackRelease(["A4", "C5"], "8n", time);
-      polySynthInstance.triggerAttackRelease(["F4"], "8n", time + 0.5);
-      polySynthInstance.triggerAttackRelease(["C4"], "8n", time + 1);
-      polySynthInstance.triggerAttackRelease(["E4"], "8n", time + 1.5);
-      console.log("new callback", time);
-      // polySynthInstance.triggerAttackRelease(["E4"], "8n", "+24n");
-      // polySynthInstance.triggerAttackRelease(["C4", "E4", "G4"], "16n", time);
-      // polySynthInstance.triggerAttackRelease(["E4", "G#4", "B4"], "16n", time);
+    sequenceInstance.callback = (time: number, note: string): void => {
+      polySynthInstance.triggerAttackRelease(note, "4n", time);
+      console.log("new callback", time, note);
     };
 
-    startLoop("#startLoopButton");
+    startSequence("#startLoopButton");
+    setLoopState("started");
+  }
+
+  function stop(): void {
+    stopSequence();
+    setLoopState("stopped");
   }
 
   function updateBpm(_event: React.ChangeEvent<{}>, value: number | number[]): void {
